@@ -1,4 +1,5 @@
 using csharp_todo_api.DTOs;
+using csharp_todo_api.Models;
 using csharp_todo_api.Exceptions;
 using csharp_todo_api.Repositories;
 using csharp_todo_api.Interfaces.Services;
@@ -14,9 +15,29 @@ public class AuthService : IAuthService
         _repo = repository;
     }
 
-    public Task<UserResponseDTO> RegisterAsync(UserCreateDTO user)
+    public async Task<UserResponseDTO> RegisterAsync(UserCreateDTO userDTO)
     {
-        throw new NotImplementedException();
+        if (await _repo.GetByEmailAsync(userDTO.Email) != null)
+            throw new ConflictException("This email address has already been registered.");
+
+        var user = new User
+        {
+            Email = userDTO.Email,
+            PasswordHash = BCrypt.Net.BCrypt.HashPassword(userDTO.Password),
+            Username = userDTO.Username,
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow,
+        };
+
+        await _repo.RegisterAsync(user);
+
+        return new UserResponseDTO
+        {
+            Email = user.Email,
+            Username = user.Username,
+            CreatedAt = user.CreatedAt,
+            UpdatedAt = user.UpdatedAt
+        };
     }
 
     public Task<string> LoginAsync(string email, string password)
