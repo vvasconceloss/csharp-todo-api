@@ -14,6 +14,13 @@ public class AuthController : ControllerBase
         _service = service;
     }
 
+    [HttpPost]
+    [Route("user/register")]
+    public async Task<ActionResult<UserResponseDTO>> Register(UserCreateDTO userDTO)
+    {
+        return Ok(await _service.RegisterAsync(userDTO));
+    }
+
     [HttpGet]
     [Route("user/{email}")]
     public async Task<ActionResult<UserResponseDTO>> GetUserByEmail(string email)
