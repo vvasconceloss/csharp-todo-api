@@ -4,7 +4,7 @@ namespace csharp_todo_api.Interfaces.Repositories;
 
 public interface IAuthRepository
 {
-    Task<User> RegisterAsync(User user, string password);
+    Task<User> RegisterAsync(User user);
     Task<string> LoginAsync(string email, string password);
     Task<User?> GetByEmailAsync(string email);
 }
