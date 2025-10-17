@@ -13,9 +13,12 @@ public class AuthRepository : IAuthRepository
         _context = context;
     }
 
-    public Task<User> RegisterAsync(User user, string password)
+    public async Task<User> RegisterAsync(User user)
     {
-        throw new NotImplementedException();
+        await _context.Users.AddAsync(user);
+        await _context.SaveChangesAsync();
+
+        return user;
     }
 
     public Task<string> LoginAsync(string email, string password)
