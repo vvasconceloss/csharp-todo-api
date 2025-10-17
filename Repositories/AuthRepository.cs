@@ -1,5 +1,6 @@
 using csharp_todo_api.Models;
 using csharp_todo_api.Context;
+using Microsoft.EntityFrameworkCore;
 using csharp_todo_api.Interfaces.Repositories;
 
 namespace csharp_todo_api.Repositories;
@@ -26,8 +27,9 @@ public class AuthRepository : IAuthRepository
         throw new NotImplementedException();
     }
 
-    public Task<User?> GetByEmailAsync(string email)
+    public async Task<User?> GetByEmailAsync(string email)
     {
-        throw new NotImplementedException();
+        var user = await _context.Users.FirstOrDefaultAsync(user => user.Email == email);
+        return user;
     }
 }
