@@ -1,4 +1,5 @@
 using csharp_todo_api.DTOs;
+using csharp_todo_api.Exceptions;
 using csharp_todo_api.Repositories;
 using csharp_todo_api.Interfaces.Services;
 
@@ -28,7 +29,7 @@ public class AuthService : IAuthService
         var user = await _repo.GetByEmailAsync(email);
 
         if (user == null)
-            throw new Exception("The user was not found.");
+            throw new NotFoundException("The user was not found.");
 
         return new UserResponseDTO
         {
