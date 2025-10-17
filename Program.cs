@@ -26,6 +26,5 @@ if (app.Environment.IsDevelopment())
     app.UseExceptionHandler("/error"); //FALLBACK
 }
 
-app.UseHttpsRedirection();
-
+app.MapControllers();
 app.Run();
