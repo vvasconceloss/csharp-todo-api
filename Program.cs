@@ -27,7 +27,6 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    app.UseExceptionHandler("/error"); //FALLBACK
 }
 
 app.MapControllers();
