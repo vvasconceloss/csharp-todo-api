@@ -23,8 +23,19 @@ public class AuthService : IAuthService
         throw new NotImplementedException();
     }
 
-    public Task<UserResponseDTO?> GetByEmailAsync(string email)
+    public async Task<UserResponseDTO?> GetByEmailAsync(string email)
     {
-        throw new NotImplementedException();
+        var user = await _repo.GetByEmailAsync(email);
+
+        if (user == null)
+            throw new Exception("The user was not found.");
+
+        return new UserResponseDTO
+        {
+            Email = user.Email,
+            Username = user.Username,
+            CreatedAt = user.CreatedAt,
+            UpdatedAt = user.UpdatedAt
+        };
     }
 }
