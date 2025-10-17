@@ -1,6 +1,6 @@
 using csharp_todo_api.Models;
 
-namespace csharp_todo_api.Interfaces.Services;
+namespace csharp_todo_api.Interfaces.Repositories;
 
 public interface IAuthRepository
 {
