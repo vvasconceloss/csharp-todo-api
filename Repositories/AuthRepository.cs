@@ -22,11 +22,6 @@ public class AuthRepository : IAuthRepository
         return user;
     }
 
-    public Task<string> LoginAsync(string email, string password)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<User?> GetByEmailAsync(string email)
     {
         var user = await _context.Users.FirstOrDefaultAsync(user => user.Email == email);
