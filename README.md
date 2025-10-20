@@ -42,32 +42,49 @@ The API includes the following features:
 
 ```
 TodoListApi/
+├── Context/
+│   └── AppDbContext.cs
 ├── Controllers/
 │   ├── AuthController.cs
 │   └── TodosController.cs
 ├── DTOs/
 │   └── UserDTO.cs
+├── Exceptions/
+│   ├── BadRequestException.cs
+│   ├── BaseException.cs
+│   ├── ConflictException.cs
+│   ├── NotFoundException.cs
+│   └── UnauthorizedException.cs
+├── Interfaces/
+│   ├── Repoitories
+│   │   └── IAuthRepository.cs
+│   └── Services
+│   │   └── IAuthService.cs
+├── Middlewares/
+│   └── ExceptionHandlingMiddleware.cs
 ├── Models/
 │   ├── User.cs
 │   └── Todo.cs
-├── Data/
-│   └── AppDbContext.cs
+├── Repositories/
+│   └── AuthRepository.cs
 ├── Services/
-│   └── TokenService.cs
+│   └── AuthService.cs
+├── Validations/
+│   └── UserCreateDTOValidator.cs
 ├── Program.cs
 └── appsettings.json
 ```
 
 ## Main Endpoints
 
-| Method | Endpoint    | Description                        |
-| ------ | ----------- | ---------------------------------- |
-| POST   | /register   | Register a new user                |
-| POST   | /login      | Authenticate user and return token |
-| GET    | /todos      | Get paginated list of todos        |
-| POST   | /todos      | Create new todo                    |
-| PUT    | /todos/{id} | Update existing todo               |
-| DELETE | /todos/{id} | Delete existing todo               |
+| Method | Endpoint        | Description                        |
+| ------ | --------------- | ---------------------------------- |
+| POST   | user/register   | Register a new user                |
+| POST   | user/login      | Authenticate user and return token |
+| GET    | /todos          | Get paginated list of todos        |
+| POST   | /todos          | Create new todo                    |
+| PUT    | /todos/{id}     | Update existing todo               |
+| DELETE | /todos/{id}     | Delete existing todo               |
 
 ## Run Instructions
 
